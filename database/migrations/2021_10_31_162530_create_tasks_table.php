@@ -17,6 +17,7 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('text');
             $table->enum('status', ['ativa', 'feita', 'cancelada']);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
