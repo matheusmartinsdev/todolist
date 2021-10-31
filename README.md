@@ -27,7 +27,9 @@ _Para os métodos GET_
 {
     "id": 1, //int
     "text": "Uma tarefa qualquer", //string
-    "status": "ativa" //pode ser: ativa / feita / cancelada
+    "status": "ativa", //pode ser: ativa / feita / cancelada
+    "created_at": "2021-10-31T20:56:38.000000Z", //timestamps
+    "updated_at": "2021-10-31T20:56:38.000000Z" //timestamps
 }
 ```
 
