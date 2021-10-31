@@ -32,4 +32,11 @@ class TaskController extends Controller
         $task = Task::create($request->all());
         return new TaskResource($task);
     }
+
+    public function delete(int $id)
+    {
+        $task = Task::findOrFail($id);
+        $task->delete();
+        return new TaskResource($task);
+    }
 }
