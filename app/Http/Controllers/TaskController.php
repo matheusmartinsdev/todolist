@@ -33,6 +33,13 @@ class TaskController extends Controller
         return new TaskResource($task);
     }
 
+    public function update(int $id)
+    {
+        $task = Task::findOrFail($id);
+        $task->update(request()->all());
+        return new TaskResource($task);
+    }
+
     public function delete(int $id)
     {
         $task = Task::findOrFail($id);
