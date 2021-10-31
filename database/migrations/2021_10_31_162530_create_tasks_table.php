@@ -15,8 +15,8 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->boolean('ativo');
+            $table->string('text');
+            $table->enum('status', ['ativa', 'feita', 'cancelada']);
             $table->timestamps();
         });
     }
