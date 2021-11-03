@@ -44,7 +44,7 @@ class Handler extends ExceptionHandler
     {
         if($e instanceof ModelNotFoundException) {
             return response()->json([
-                "erro" => "Registro do tipo " .$e->getModel() . " não encontrado."
+                "erro" => "Registro não encontrado."
             ], 404);
         }
 
