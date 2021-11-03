@@ -43,6 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
 // Rotas públicas
 
 Route::post('usuarios', [UserController::class, 'register']);
+Route::post('usuarios/login', [UserController::class, 'login']);
 
 // Fallback
 Route::fallback(function () {

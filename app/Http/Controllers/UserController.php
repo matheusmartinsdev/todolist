@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UserAuthRequest;
 use App\Http\Resources\UserResource;
@@ -28,10 +29,21 @@ class UserController extends Controller
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return response()->json([
-                'message' => 'Invalid credentials',
+                'mensagem' => 'Credenciais inválidas',
             ], 401);
         }
 
         return new UserAuthResource($user);
+    }
+
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+
+        $user->tokens()->delete();
+
+        return response()->json([
+            'mensagem' => 'Deslogado com sucesso',
+        ]);
     }
 }
