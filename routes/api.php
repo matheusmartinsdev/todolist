@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
@@ -16,33 +15,36 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Rotas Protegidas
+
+Route::middleware('auth:sanctum')->group(function () {
+    
+    // TASKS ROUTES - Todas protegidas por auth:sanctum middleware
+    
+    // 1 - Exibe uma lista paginada das tarefas.
+    Route::get('tarefas', [TaskController::class, 'show'])->middleware('auth:sanctum');
+
+    // 2 - Exibe uma tarefa de acordo com o ID informado.
+    Route::get('tarefas/{id}', [TaskController::class, 'showById']);
+
+    // 3 - Cria uma nova tarefa.
+    Route::post('tarefas', [TaskController::class, 'store']);
+
+    // 4 - Edita uma tarefa
+    Route::patch('tarefas/{id}', [TaskController::class, 'update']);
+
+    // 5 - Deleta uma tarefa
+    Route::delete('tarefas/{id}', [TaskController::class, 'delete']);
+
+    // USERS ROUTES
+    Route::post('usuarios/logout', [UserController::class, 'logout']);
 });
 
-// TASKS ROUTES
+// Rotas públicas
 
-//1 - Exibe uma lista paginada das tarefas.
-Route::get('tarefas', [TaskController::class, 'show']);
+Route::post('usuarios', [UserController::class, 'register']);
 
-//2 - Exibe uma tarefa de acordo com o ID informado.
-Route::get('tarefas/{id}', [TaskController::class, 'showById']);
-
-//3 - Cria uma nova tarefa.
-Route::post('tarefas', [TaskController::class, 'store']);
-
-//4 - Edita uma tarefa
-Route::patch('tarefas/{id}', [TaskController::class, 'update']);
-
-//5 - Deleta uma tarefa
-Route::delete('tarefas/{id}', [TaskController::class, 'delete']);
-
-// USERS ROUTES
-
-//Rota criar usuário
-Route::post('usuarios', [UserController::class, 'store']);
-
-//Fallback
+// Fallback
 Route::fallback(function () {
     return response()->json(['erro' => 'Endpoind não encontrado!'], 404);
 });

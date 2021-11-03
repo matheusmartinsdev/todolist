@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\User;
 
-class UserResource extends JsonResource
+class UserAuthResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,12 +18,8 @@ class UserResource extends JsonResource
         $user = User::where('id', $this->id)->first();
         
         $userToken = $user->createToken('appToken')->plainTextToken;
+        
         return [
-            'id' => $this->id,
-            'nome' => $this->name,
-            'email' => $this->email,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'token' => $userToken
         ];
     }
