@@ -4,8 +4,9 @@ To-do list API feita com Laravel 8 e PHP 8.0.
 
 # Headers
 
-Content/Type: application/json
-Accept: application/json
+**Content/Type:** application/json
+
+**Accept:** application/json
 
 # Objeto
 
