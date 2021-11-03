@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// TASKS ROUTES
 
 //1 - Exibe uma lista paginada das tarefas.
 Route::get('tarefas', [TaskController::class, 'show']);
@@ -34,3 +36,13 @@ Route::patch('tarefas/{id}', [TaskController::class, 'update']);
 
 //5 - Deleta uma tarefa
 Route::delete('tarefas/{id}', [TaskController::class, 'delete']);
+
+// USERS ROUTES
+
+//Rota criar usuário
+Route::post('usuarios', [UserController::class, 'store']);
+
+//Fallback
+Route::fallback(function () {
+    return response()->json(['erro' => 'Endpoind não encontrado!'], 404);
+});
