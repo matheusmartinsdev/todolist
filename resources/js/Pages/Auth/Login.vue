@@ -52,20 +52,15 @@
         >
           Forgot your password?
         </Link>
-
-        <jet-button
-          class="ml-4"
-          :class="{ 'opacity-25': form.processing }"
-          :disabled="form.processing"
+        <Link
+          :href="route('register')"
+          class="underline text-sm text-gray-600 hover:text-gray-900"
         >
+          Don't have a account yet? Register here!
+        </Link>
+
+        <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }">
           Log in
-        </jet-button>
-
-        <jet-button
-          class="ml-4 bg-black border-gray-600 text-white hover:text-white"
-          :type="button"
-        >
-          <Link :href="route('register')"> Register </Link>
         </jet-button>
       </div>
     </form>
