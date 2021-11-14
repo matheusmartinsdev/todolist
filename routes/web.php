@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,5 +36,5 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::post('/tarefas/cadastrar', [DashboardController::class, 'store'])->name('store');
 
-    Route::patch('/tarefas/{id}', [TaskController::class, 'update'])->name('update');
+    Route::patch('/tarefas/{id}', [DashboardController::class, 'update'])->name('update');
 });

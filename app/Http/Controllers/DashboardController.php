@@ -7,14 +7,17 @@ use Inertia\Inertia;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use Illuminate\Support\Facades\Redirect;
 
 class DashboardController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Busca no model uma lista paginada de tarefas.
+     * Caso haja 'status' na requisição, retorna uma lista paginada de tarefas com aquele status. 
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return Inertia\Inertia
      */
     public function index(Request $request)
     {
@@ -30,20 +33,10 @@ class DashboardController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Registra uma nova tarefa no banco de dados.
      *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  App\Http\Requests\StoreTaskRequest  $request
+     * @return Illuminate\Support\Facades\Redirect com mensagem de sucesso
      */
     public function store(StoreTaskRequest $request)
     {
@@ -59,44 +52,27 @@ class DashboardController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Atualiza um registro no banco de dados.
      *
+     * @param  \App\Http\Requests\UpdateTaskRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Illuminate\Support\Facades\Redirect
      */
-    public function show($id)
+    public function update(UpdateTaskRequest $request, int $id)
     {
-        //
+        $task = Task::where('user_id', auth()->id())
+                ->findOrFail($id);
+        
+        $task->update($request->validated());
+
+        return Redirect::route('dashboard')->with('success', 'Tarefa atualizada!');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Remove uma tarefa do banco de dados.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Illuminate\Support\Facades\Redirect com mensagem de sucesso
      */
     public function destroy(int $id)
     {
