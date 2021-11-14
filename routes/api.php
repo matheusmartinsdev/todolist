@@ -22,19 +22,19 @@ Route::middleware('auth:sanctum')->group(function () {
     // TASKS ROUTES - Todas protegidas por auth:sanctum middleware
     
     // 1 - Exibe uma lista paginada das tarefas.
-    Route::get('tarefas', [TaskController::class, 'show'])->middleware('auth:sanctum');
+    Route::get('tarefas', [TaskController::class, 'show'])->name('api.show');
 
     // 2 - Exibe uma tarefa de acordo com o ID informado.
-    Route::get('tarefas/{id}', [TaskController::class, 'showById']);
+    Route::get('tarefas/{id}', [TaskController::class, 'showById'])->name('api.showById');
 
     // 3 - Cria uma nova tarefa.
-    Route::post('tarefas', [TaskController::class, 'store']);
+    Route::post('tarefas', [TaskController::class, 'store'])->name('api.store');
 
     // 4 - Edita uma tarefa
-    Route::patch('tarefas/{id}', [TaskController::class, 'update']);
+    Route::patch('tarefas/{id}', [TaskController::class, 'update'])->name('api.update');
 
     // 5 - Deleta uma tarefa
-    Route::delete('tarefas/{id}', [TaskController::class, 'delete']);
+    Route::delete('tarefas/{id}', [TaskController::class, 'destroy'])->name('api.delete');
 
     // USERS ROUTES
     Route::post('usuarios/logout', [UserController::class, 'logout']);

@@ -1,0 +1,64 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.btn-edit {
+  @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+}
+
+.btn-delete {
+  @apply py-2 px-4 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75;
+}
+
+.btn-newtask {
+  @apply bg-green-400
+    hover:bg-green-600
+    text-white
+    font-bold
+    py-2
+    px-4
+    rounded;
+}
+
+.status-feita {
+  @apply px-2
+  inline-flex
+  text-xs
+  leading-5
+  font-semibold
+  rounded-full
+  bg-green-100
+  text-green-800;
+}
+
+.status-cancelada {
+  @apply px-2
+    inline-flex
+    text-xs
+    leading-5
+    font-semibold
+    rounded-full
+    bg-red-100
+    text-red-800;
+}
+
+.status-ativa {
+  @apply px-2
+      inline-flex
+      text-xs
+      leading-5
+      font-semibold
+      rounded-full
+      bg-yellow-100
+      text-yellow-800;
+}
+
+.table-th {
+  @apply px-6
+    py-3
+    text-left text-xs
+    font-medium
+    text-gray-500
+    uppercase
+    tracking-wider;
+}
