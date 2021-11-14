@@ -8,13 +8,33 @@ Sistema de autenticação com Laravel Sanctum para gerência de usuários, onde 
 
 Este README divide as rotas e objetos de exemplo em _usuarios_ e _tasks_, onde _usuarios_ diz respeito aos modelos de rotas e objetos relacionadas ao sistema de usuários, e _tasks_ está relacionado as operações que um usuário pode realizar sobre suas tasks **quando está autenticado via token**.
 
-# Headers
+# UPDATE
+
+Resolvi implementar interface web na aplicação e para isso utilizei Inertia/Vue, juntamente com alguns componentes prontos do Laravel/Jetstream.
+
+Para evitar um alto acoplamento de códigos, resolvi criar um novo controller para as operações da aplicação web (DashboardController).
+
+**Essa foi a minha primeira experiência com Vue**.
+
+Seguem alguns prints abaixo.
+
+### Demonstração do CRUD
+
+![Demonstrando as operações do CRUD](crud_demonstration.gif)
+
+### Demonstração da paginação das tarefas
+
+![Demonstrando as operações do CRUD](pagination.gif)
+
+# API
+
+## Headers
 
 **Content/Type:** application/json
 
 **Accept:** application/json
 
-# Rotas - /usuarios
+## Rotas - /usuarios
 
 As rotas abaixo são para registrar um novo usuário e logar no sistema através de token.
 
@@ -83,7 +103,7 @@ As rotas abaixo são para registrar um novo usuário e logar no sistema através
 }
 ```
 
-# Rotas - /tarefas
+## Rotas - /tarefas
 
 As rotas abaixo são para cadastrar uma nova tarefa para o usuário logado.
 
