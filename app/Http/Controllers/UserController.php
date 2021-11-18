@@ -14,11 +14,7 @@ class UserController extends Controller
 {
     public function register(StoreUserRequest $request)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = User::create($request->validated());
 
         return new UserResource($user);
     }
