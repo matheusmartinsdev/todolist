@@ -44,7 +44,7 @@
         </label>
       </div>
 
-      <div class="flex items-center justify-end mt-4">
+      <div class="inline-flex items-center justify-end mt-4">
         <Link
           v-if="canResetPassword"
           :href="route('password.request')"
@@ -52,17 +52,23 @@
         >
           Forgot your password?
         </Link>
-        <Link
-          :href="route('register')"
-          class="underline text-sm text-gray-600 hover:text-gray-900"
-        >
-          Don't have a account yet? Register here!
-        </Link>
-
         <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }">
           Log in
         </jet-button>
       </div>
+      <Link
+        :href="route('register')"
+        class="
+          inline-flex
+          justify-center
+          mt-5
+          underline
+          text-sm text-gray-600
+          hover:text-gray-900
+        "
+      >
+        Don't have a account yet? Register here!
+      </Link>
     </form>
   </jet-authentication-card>
 </template>

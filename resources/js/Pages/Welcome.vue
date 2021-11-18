@@ -7,7 +7,7 @@
     </div>
 
     <div v-else class="container mx-auto">
-      <login></login>
+      <login :canResetPassword="true"></login>
     </div>
   </div>
 </template>
