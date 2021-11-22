@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Task;
 use Inertia\Testing\Assert;
 use Tests\TestCase;
+use Illuminate\Support\Collection;
 
 class DashboardControllerTest extends TestCase
 {
@@ -19,25 +20,38 @@ class DashboardControllerTest extends TestCase
     {
         //Creating fake user to test
         $user = User::factory()->create();
+        
         /** @var \Illuminate\Contracts\Auth\Authenticatable $user */
-
         //Log in user
         $this->actingAs($user);
 
         $taskStatusToBeTested = 'ativa'; //Enum: 'ativa'|'feita'|'cancelada'
 
-        //Creating fake task
-        $task = Task::factory()->create([
+        Task::factory()->create([
             'text' => 'tarefa',
             'status' => $taskStatusToBeTested,
             'user_id' => $user->id
         ]);
 
+        Task::factory()->create([
+            'text' => 'tarefa',
+            'status' => 'cancelada',
+            'user_id' => $user->id
+        ]);  
+        
+        Task::factory()->create([
+            'text' => 'tarefa',
+            'status' => 'feita',
+            'user_id' => $user->id
+        ]);
+        
         //Checking if the $taskStatusToBeTested is founded in the task list.
-        $response = $this->get('/dashboard?status=' . $task->status);
+        $response = $this->get('/dashboard?status=' . $taskStatusToBeTested);
         $response->assertInertia(fn (Assert $page) => $page
-            ->url('/dashboard?status='. $task->status)
-            ->where('tasks.data.0.status', $task->status)
+            ->url('/dashboard?status='. $taskStatusToBeTested)
+            ->where('tasks.data', fn (Collection $value) => 
+                !$value->contains('status', 'cancelada') &&
+                !$value->contains('status', 'feita'))
         );
 
         $response->assertStatus(200);
